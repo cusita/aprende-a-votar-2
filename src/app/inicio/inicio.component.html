@@ -1,26 +1,35 @@
-<div class="banner">
-  <img src="assets/images/banner.jpeg" alt="Banner" class="banner-img">
-</div>
+<div *ngIf="!mostrarMensajeRutaInvalida; else mensajeRutaInvalida">
+  <div class="banner" *ngIf="configuracion?.imgHeader">
+    <img [src]="configuracion?.imgHeader" alt="Banner" class="banner-img">
+  </div>
 
-<div class="container">  
-  <div class="botones-container">
-    <button class="boton-votar" (click)="navegarACamara()">
-      <div class="boton-contenido">
-        <img src="assets/images/rafa.jpg" alt="Rafa" class="foto-candidato">
-        <span class="nombre-eleccion">Rafa Cámara</span>
-      </div>
-    </button>
+  <div class="container">  
+    <div class="botones-container" [class.un-solo-boton]="tieneSoloUnBoton">
+      <button *ngIf="configuracion?.camara" class="boton-votar" (click)="navegarACamara()" [style.backgroundColor]="configuracion?.color">
+        <div class="boton-contenido">
+          <img *ngIf="configuracion?.camara?.foto" [src]="configuracion?.camara?.foto" [alt]="configuracion?.camara?.nombre || 'Cámara'" class="foto-candidato">
+          <span class="nombre-eleccion">{{ configuracion?.camara?.nombre || 'Cámara' }} Cámara</span>
+        </div>
+      </button>
 
-    <button class="boton-votar" (click)="navegarASenado()">
-      <div class="boton-contenido">
-        <img src="assets/images/nadia.jpg" alt="Nadia" class="foto-candidato">
-        <span class="nombre-eleccion">Nadia Senado</span>
-      </div>
-    </button>
+      <button *ngIf="configuracion?.senado" class="boton-votar" (click)="navegarASenado()" [style.backgroundColor]="configuracion?.color">
+        <div class="boton-contenido">
+          <img *ngIf="configuracion?.senado?.foto" [src]="configuracion?.senado?.foto" [alt]="configuracion?.senado?.nombre || 'Senado'" class="foto-candidato">
+          <span class="nombre-eleccion">{{ configuracion?.senado?.nombre || 'Senado' }} Senado</span>
+        </div>
+      </button>
+    </div>
   </div>
 </div>
+
+<ng-template #mensajeRutaInvalida>
+  <div class="container">
+    <p class="mensaje-ruta-invalida">Verifica que la ruta sea correcta.</p>
+  </div>
+</ng-template>
 
 <footer class="footer">
   <p class="copyright">&copy; 2026 Katya Alvear. Todos los derechos reservados.</p>
   <p class="contacto">WhatsApp: <a href="https://wa.me/573508223190" target="_blank">+57 350 822 3190</a></p>
 </footer>
+

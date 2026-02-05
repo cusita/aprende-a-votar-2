@@ -1,7 +1,13 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LISTAS_CAMARA, ListaCamara } from '../listas-camara.constants';
+import { ListaCamara } from '../listas-camara.constants';
+import {
+  CONFIGURACION_POR_DEFECTO,
+  ConfiguracionCandidatosItem,
+  obtenerConfiguracionPorCodigo,
+} from '../configuracion';
+import { obtenerListasCamaraConfiguradas } from '../listas-configuracion';
 
 @Component({
   selector: 'app-camara-representantes',
@@ -10,7 +16,9 @@ import { LISTAS_CAMARA, ListaCamara } from '../listas-camara.constants';
   styleUrl: './camara-representantes.component.scss',
 })
 export class CamaraRepresentantesComponent implements OnInit, OnDestroy {
-  listas: ListaCamara[] = LISTAS_CAMARA;
+  listas: ListaCamara[] = [];
+  configuracion: ConfiguracionCandidatosItem | null = CONFIGURACION_POR_DEFECTO;
+  codigo: string | null = CONFIGURACION_POR_DEFECTO?.codigo ?? null;
   mostrarModal = false;
   mensajeModal = '';
   esCorrecto = false;
@@ -24,10 +32,20 @@ export class CamaraRepresentantesComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const codigo = this.route.snapshot.paramMap.get('codigo');
+    const configuracion = obtenerConfiguracionPorCodigo(codigo) ?? CONFIGURACION_POR_DEFECTO;
+
+    this.configuracion = configuracion;
+    this.codigo = configuracion?.codigo ?? null;
+    this.listas = obtenerListasCamaraConfiguradas(
+      configuracion?.camara?.numeroCandidato,
+    );
+  }
 
   onSeleccionarCandidato(candidato: { numero: number; elegido: boolean }, lista: ListaCamara) {
     // Si el candidato no es elegido, error inmediato
@@ -111,6 +129,11 @@ export class CamaraRepresentantesComponent implements OnInit, OnDestroy {
       this.timerModal = null;
     }
     this.limpiarDatos();
+    if (this.codigo) {
+      this.router.navigate(['/cod', this.codigo]);
+      return;
+    }
+
     this.router.navigate(['/']);
   }
 
@@ -131,6 +154,11 @@ export class CamaraRepresentantesComponent implements OnInit, OnDestroy {
 
   volver() {
     this.limpiarDatos();
+    if (this.codigo) {
+      this.router.navigate(['/cod', this.codigo]);
+      return;
+    }
+
     this.router.navigate(['/']);
   }
 

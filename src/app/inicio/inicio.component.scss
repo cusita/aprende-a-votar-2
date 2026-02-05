@@ -52,11 +52,19 @@
   gap: 2rem;
   width: 100%;
   max-width: 500px;
+  margin: 0 auto;
 
   @media (min-width: 769px) {
     flex-direction: row;
     max-width: 1000px;
     gap: 3rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .botones-container.un-solo-boton {
+    max-width: 30rem;
+    justify-content: center;
   }
 }
 
@@ -87,7 +95,6 @@
   align-items: center;
   gap: 2rem;
   padding: 2rem;
-  width: 100%;
 
   @media (max-width: 768px) {
     gap: 1rem;
@@ -118,6 +125,14 @@
   @media (max-width: 768px) {
     font-size: 1.5rem;
   }
+}
+
+.mensaje-ruta-invalida {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #b91c1c;
+  text-align: center;
+  padding: 2rem 1.5rem;
 }
 
 .footer {

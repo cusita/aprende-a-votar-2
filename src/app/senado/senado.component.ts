@@ -1,7 +1,13 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { LISTAS_SENADO, ListaSenado } from '../listas-senado.constants';
+import { ListaSenado } from '../listas-senado.constants';
+import {
+  CONFIGURACION_POR_DEFECTO,
+  ConfiguracionCandidatosItem,
+  obtenerConfiguracionPorCodigo,
+} from '../configuracion';
+import { obtenerListasSenadoConfiguradas } from '../listas-configuracion';
 
 @Component({
   selector: 'app-senado',
@@ -10,7 +16,9 @@ import { LISTAS_SENADO, ListaSenado } from '../listas-senado.constants';
   styleUrl: './senado.component.scss'
 })
 export class SenadoComponent implements OnInit, OnDestroy {
-  listas: ListaSenado[] = LISTAS_SENADO;
+  listas: ListaSenado[] = [];
+  configuracion: ConfiguracionCandidatosItem | null = CONFIGURACION_POR_DEFECTO;
+  codigo: string | null = CONFIGURACION_POR_DEFECTO?.codigo ?? null;
   mostrarModal = false;
   mensajeModal = '';
   esCorrecto = false;
@@ -24,10 +32,19 @@ export class SenadoComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
+    const codigo = this.route.snapshot.paramMap.get('codigo');
+    const configuracion = obtenerConfiguracionPorCodigo(codigo) ?? CONFIGURACION_POR_DEFECTO;
+
+    this.configuracion = configuracion;
+    this.codigo = configuracion?.codigo ?? null;
+    this.listas = obtenerListasSenadoConfiguradas(
+      configuracion?.senado?.numeroCandidato,
+    );
   }
 
   onSeleccionarCandidato(candidato: { numero: number; elegido: boolean }, lista: ListaSenado) {
@@ -112,6 +129,11 @@ export class SenadoComponent implements OnInit, OnDestroy {
       this.timerModal = null;
     }
     this.limpiarDatos();
+    if (this.codigo) {
+      this.router.navigate(['/cod', this.codigo]);
+      return;
+    }
+
     this.router.navigate(['/']);
   }
 
@@ -132,6 +154,11 @@ export class SenadoComponent implements OnInit, OnDestroy {
 
   volver() {
     this.limpiarDatos();
+    if (this.codigo) {
+      this.router.navigate(['/cod', this.codigo]);
+      return;
+    }
+
     this.router.navigate(['/']);
   }
 
