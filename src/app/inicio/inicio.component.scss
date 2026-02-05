@@ -1,0 +1,155 @@
+.banner {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  max-height: 250px;
+
+  @media (min-width: 769px) {
+    max-height: 400px;
+  }
+}
+
+.banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.container {
+  padding-bottom: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  min-height: calc(100vh - 250px);
+
+  @media (min-width: 769px) {
+    padding: 3rem 2rem;
+    padding-bottom: 150px;
+    min-height: calc(100vh - 500px);
+  }
+}
+
+.titulo {
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 4rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.botones-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 500px;
+
+  @media (min-width: 769px) {
+    flex-direction: row;
+    max-width: 1000px;
+    gap: 3rem;
+  }
+}
+
+.boton-votar {
+  background-color: #2563eb;
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  flex: 1;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    background-color: #1d4ed8;
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+.boton-contenido {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+.foto-candidato {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  background-color: white;
+
+  @media (max-width: 768px) {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.nombre-eleccion {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+}
+
+.footer {
+  background-color: #f5f5f5;
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.copyright {
+  margin: 0 0 0.5rem 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.contacto {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+
+  a {
+    color: #2563eb;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

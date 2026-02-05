@@ -1,0 +1,55 @@
+<div class="container">
+  <h1 class="titulo">VOTO PARA SENADO DE LA REPÚBLICA</h1>
+  <p class="subtitulo">CIRCUNSCRIPCIÓN NACIONAL - 8 DE MARZO DE 2026</p>
+  <p class="instrucciones">MARCAR MÁS DE UNA LISTA ANULA EL VOTO</p>
+  
+  <div class="tarjeton">
+    <div class="listas-grid">
+      <div *ngFor="let lista of listas" class="lista-card" 
+           [class.sin-preferente]="!lista.preferente"
+           [class.voto-blanco]="lista.nombre === 'VOTO EN BLANCO'"
+           (click)="onClickListaNoPreferente(lista)">
+        
+        <ng-container *ngIf="lista.nombre === 'VOTO EN BLANCO'; else listaNormal">
+          <img [src]="lista.logo" [alt]="lista.nombre" class="voto-blanco-img">
+        </ng-container>
+        
+        <ng-template #listaNormal>
+          <div class="lista-header">
+            <h3 class="lista-nombre">{{ lista.nombre }}</h3>
+            <div class="logo-container" (click)="onClickLogoPartido(lista, $event)">
+              <img [src]="lista.logo" [alt]="lista.nombre" class="lista-logo">
+              <img *ngIf="mostrarXPartido && partidoSeleccionadoPorLogo === lista" 
+                   src="assets/images/red-cross.gif" 
+                   alt="Marcado" 
+                   class="marca-x-logo">
+            </div>
+            <p class="lista-tipo">{{ lista.preferente ? 'PREFERENTE' : 'NO PREFERENTE' }}</p>
+          </div>
+          
+          <div class="candidatos-grid">
+            <button 
+              *ngFor="let candidato of lista.candidatos" 
+              class="candidato-btn"
+              (click)="onSeleccionarCandidato(candidato, lista); $event.stopPropagation()">
+              {{ candidato.numero }}
+              <img *ngIf="candidatoSeleccionado === candidato && mostrarXCandidato" 
+                   src="assets/images/red-cross.gif" 
+                   alt="Marcado" 
+                   class="marca-x-boton">
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModal" (click)="cerrarModalYVolver()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <img *ngIf="esCorrecto" src="assets/images/check-correct.gif" alt="Correcto" class="modal-gif">
+    <img *ngIf="!esCorrecto" src="assets/images/red-cross.gif" alt="Incorrecto" class="modal-gif">
+    <p class="mensaje-modal">{{ mensajeModal }}</p>
+    <button class="boton-modal" (click)="cerrarModalYVolver()">Volver al inicio</button>
+  </div>
+</div>
