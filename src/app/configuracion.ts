@@ -15,20 +15,14 @@ export interface ConfiguracionCandidatosItem {
 
 export const configuracionCandidatos: ConfiguracionCandidatosItem[] = [
   {
-    codigo: 'rafanadia2026camarasenado',
-    imgHeader: 'assets/images/banner/banner.jpeg',
+    codigo: 'horacio-serpa-2026',
+    imgHeader: '',
     color: '#004085',
-    camara: {
-      nombre: 'Rafa',
-      numeroCandidato: 103,
-      foto: 'assets/images/candidatos/rafa.jpg',
-      partido: 'PARTIDO CONSERVADOR COLOMBIANO',
-    },
     senado: {
-      nombre: 'Nadia blel',
-      numeroCandidato: 2,
-      foto: 'assets/images/candidatos/nadia.jpg',
-      partido: 'PARTIDO CONSERVADOR COLOMBIANO',
+      nombre: 'Horacio Serpa',
+      numeroCandidato: 9,
+      foto: 'assets/images/candidatos/horacio.png',
+      partido: 'PARTIDO LIBERAL COLOMBIANO',
     },
   },
   {
