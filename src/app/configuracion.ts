@@ -7,6 +7,7 @@ export interface CandidatoConfiguracion {
 
 export interface ConfiguracionCandidatosItem {
   codigo: string;
+  espacioSuperiorBotones?: number | null;
   imgHeader: string;
   color: string;
   camara?: CandidatoConfiguracion;
@@ -16,7 +17,8 @@ export interface ConfiguracionCandidatosItem {
 export const configuracionCandidatos: ConfiguracionCandidatosItem[] = [
   {
     codigo: 'horacio-serpa-2026',
-    imgHeader: '',
+    espacioSuperiorBotones: null,
+    imgHeader: 'assets/images/banner/banner.jpeg',
     color: '#004085',
     senado: {
       nombre: 'Horacio Serpa',
@@ -27,6 +29,7 @@ export const configuracionCandidatos: ConfiguracionCandidatosItem[] = [
   },
   {
     codigo: 'solo-camara-rafa',
+    espacioSuperiorBotones: null,
     imgHeader: 'assets/images/banner/banner.jpeg',
     color: '#1d4ed8',
     camara: {
@@ -38,6 +41,7 @@ export const configuracionCandidatos: ConfiguracionCandidatosItem[] = [
   },
   {
     codigo: 'solo-senado-nadia',
+    espacioSuperiorBotones: null,
     imgHeader: 'assets/images/banner/banner.jpeg',
     color: '#16a34a',
     senado: {
@@ -49,6 +53,7 @@ export const configuracionCandidatos: ConfiguracionCandidatosItem[] = [
   },
   {
     codigo: 'sin-banner-ambos',
+    espacioSuperiorBotones: null,
     imgHeader: '',
     color: '#9333ea',
     camara: {
@@ -66,6 +71,7 @@ export const configuracionCandidatos: ConfiguracionCandidatosItem[] = [
   },
   {
     codigo: 'sin-fotos-solo-camara',
+    espacioSuperiorBotones: null,
     imgHeader: 'assets/images/banner/banner.jpeg',
     color: '#f97316',
     camara: {
@@ -73,6 +79,18 @@ export const configuracionCandidatos: ConfiguracionCandidatosItem[] = [
       numeroCandidato: 105,
       foto: '',
       partido: 'CREEMOS',
+    },
+  },
+  {
+    codigo: 'senado-no-preferente-demo',
+    espacioSuperiorBotones: null,
+    imgHeader: 'assets/images/banner/banner.jpeg',
+    color: '#0f172a',
+    senado: {
+      nombre: '',
+      numeroCandidato: 0,
+      foto: '',
+      partido: 'PARTIDO CENTRO DEMOCRÁTICO',
     },
   },
 ];

@@ -3,14 +3,17 @@ import { LISTAS_SENADO, ListaSenado } from './listas-senado.constants';
 
 interface ListaConCandidatos {
   elegido: boolean;
+  nombre: string;
   candidatos: Array<{ numero: number; elegido: boolean }>;
 }
 
 const configurarListas = <T extends ListaConCandidatos>(
   listas: T[],
   numeroCandidato?: number,
+  partido?: string,
 ): T[] => {
   const numero = typeof numeroCandidato === 'number' ? numeroCandidato : null;
+  const partidoNormalizado = partido?.trim().toLowerCase() ?? null;
 
   return listas.map((lista) => {
     const candidatos = lista.candidatos.map((candidato) => ({
@@ -18,7 +21,10 @@ const configurarListas = <T extends ListaConCandidatos>(
       elegido: numero !== null && candidato.numero === numero,
     }));
 
-    const listaElegida = candidatos.some((candidato) => candidato.elegido);
+    const listaCoincidePartido =
+      !!partidoNormalizado && lista.nombre.trim().toLowerCase() === partidoNormalizado;
+
+    const listaElegida = candidatos.some((candidato) => candidato.elegido) || listaCoincidePartido;
 
     return {
       ...lista,
@@ -30,8 +36,10 @@ const configurarListas = <T extends ListaConCandidatos>(
 
 export const obtenerListasCamaraConfiguradas = (
   numeroCandidato?: number,
-): ListaCamara[] => configurarListas(LISTAS_CAMARA, numeroCandidato);
+  partido?: string,
+): ListaCamara[] => configurarListas(LISTAS_CAMARA, numeroCandidato, partido);
 
 export const obtenerListasSenadoConfiguradas = (
   numeroCandidato?: number,
-): ListaSenado[] => configurarListas(LISTAS_SENADO, numeroCandidato);
+  partido?: string,
+): ListaSenado[] => configurarListas(LISTAS_SENADO, numeroCandidato, partido);

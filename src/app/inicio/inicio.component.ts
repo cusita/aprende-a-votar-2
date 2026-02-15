@@ -17,6 +17,7 @@ export class InicioComponent implements OnInit {
   configuracion: ConfiguracionCandidatosItem | null = null;
   codigo: string | null = null;
   mostrarMensajeRutaInvalida = false;
+  private readonly espacioSuperiorBotonesPorDefecto = 32;
 
   constructor(
     private router: Router,
@@ -60,5 +61,12 @@ export class InicioComponent implements OnInit {
   get tieneSoloUnBoton(): boolean {
     const cantidad = (this.configuracion?.camara ? 1 : 0) + (this.configuracion?.senado ? 1 : 0);
     return cantidad === 1;
+  }
+
+  get espacioSuperiorBotones(): number {
+    const valor = this.configuracion?.espacioSuperiorBotones;
+    return typeof valor === 'number' && !Number.isNaN(valor)
+      ? valor
+      : this.espacioSuperiorBotonesPorDefecto;
   }
 }

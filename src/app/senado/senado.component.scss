@@ -1,7 +1,4 @@
 .container {
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
   background-color: #f5f5f5;
 }
 
@@ -33,6 +30,10 @@
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 1270px) {
+    padding: 1.25rem;
+  }
 }
 
 .listas-grid {
@@ -40,7 +41,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     grid-template-columns: 1fr;
   }
 }
@@ -55,7 +56,7 @@
   gap: 1rem;
   align-items: baseline;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     grid-template-columns: 1fr;
     height: auto;
     min-height: 350px;
@@ -86,7 +87,7 @@
   padding-bottom: 1rem;
   margin-bottom: 1rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     grid-column: 1;
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
@@ -103,7 +104,7 @@
   justify-content: center;
   text-align: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     font-size: 0.75rem;
     min-height: 2rem;
     margin-bottom: 0.5rem;
@@ -117,7 +118,7 @@
   margin: 1rem auto;
   display: block;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     max-width: 80px;
     max-height: 60px;
     margin: 0.5rem auto;
@@ -150,7 +151,7 @@
   pointer-events: none;
   filter: grayscale(100%) brightness(0%);
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     max-width: 80px;
     max-height: 60px;
   }
@@ -162,7 +163,7 @@
   margin-top: 0.5rem;
   color: #666;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     font-size: 0.65rem;
     margin-top: 0.25rem;
   }
@@ -176,7 +177,7 @@
   align-items: start;
   align-content: start;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     grid-column: 1;
     grid-template-columns: repeat(8, 1fr);
     gap: 0.25rem;
@@ -226,7 +227,7 @@
   pointer-events: none;
   filter: grayscale(100%) brightness(0%);
 
-  @media (max-width: 768px) {
+  @media (max-width: 1270px) {
     transform: translate(-50%, -50%) scale(1.2);
   }
 }

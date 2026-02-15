@@ -44,6 +44,7 @@ export class SenadoComponent implements OnInit, OnDestroy {
     this.codigo = configuracion?.codigo ?? null;
     this.listas = obtenerListasSenadoConfiguradas(
       configuracion?.senado?.numeroCandidato,
+      configuracion?.senado?.partido,
     );
   }
 
@@ -84,13 +85,26 @@ export class SenadoComponent implements OnInit, OnDestroy {
   }
 
   onClickListaNoPreferente(lista: ListaSenado) {
-    // Si la lista no es preferente, error
-    if (!lista.preferente) {
+    if (lista.preferente) {
+      return;
+    }
+
+    if (!lista.elegido) {
       this.mensajeModal = 'Te equivocaste. Vuelve a intentarlo.';
       this.esCorrecto = false;
       this.mostrarModal = true;
       return;
     }
+
+    this.partidoSeleccionadoPorLogo = lista;
+    this.mostrarXPartido = true;
+    this.mostrarMarcaX = true;
+    this.mensajeModal = '¡Muy bien! Has elegido correctamente.';
+    this.esCorrecto = true;
+    this.timerModal = setTimeout(() => {
+      this.mostrarModal = true;
+      this.cdr.detectChanges();
+    }, 1000);
   }
 
   onClickLogoPartido(lista: ListaSenado, event: Event) {
@@ -107,6 +121,17 @@ export class SenadoComponent implements OnInit, OnDestroy {
     // El partido es elegido - mostrar X inmediatamente
     this.partidoSeleccionadoPorLogo = lista;
     this.mostrarXPartido = true;
+
+    if (!lista.preferente) {
+      this.mostrarMarcaX = true;
+      this.mensajeModal = '¡Muy bien! Has elegido correctamente.';
+      this.esCorrecto = true;
+      this.timerModal = setTimeout(() => {
+        this.mostrarModal = true;
+        this.cdr.detectChanges();
+      }, 1000);
+      return;
+    }
 
     // Verificar si ya seleccionó el candidato correcto
     if (this.candidatoSeleccionado && this.candidatoSeleccionado.elegido && this.listaSeleccionada === lista) {

@@ -4,7 +4,7 @@
   </div>
 
   <div class="container">  
-    <div class="botones-container" [class.un-solo-boton]="tieneSoloUnBoton">
+    <div class="botones-container" [class.un-solo-boton]="tieneSoloUnBoton" [style.marginTop.px]="espacioSuperiorBotones">
       <button *ngIf="configuracion?.camara" class="boton-votar" (click)="navegarACamara()" [style.backgroundColor]="configuracion?.color">
         <div class="boton-contenido">
           <img *ngIf="configuracion?.camara?.foto" [src]="configuracion?.camara?.foto" [alt]="configuracion?.camara?.nombre || 'Cámara'" class="foto-candidato">
@@ -29,6 +29,18 @@
 </ng-template>
 
 <footer class="footer">
+  <div class="footer-cta">
+    <div class="footer-cta__inner">
+      <img
+        class="footer-cta__logo"
+        src="https://visionwebinternacional.com/wp-content/uploads/2025/09/logo-vision.png"
+        alt="Visión Web"
+      />
+      <span class="footer-cta__divider" aria-hidden="true"></span>
+      <p class="footer-cta__text">Soluciones Empresariales</p>
+      <a class="footer-cta__phone" href="tel:+573115215425">+57 311 521 5425</a>
+    </div>
+  </div>
   <p class="copyright">&copy; 2026 Vision Web. Todos los derechos reservados.</p>
 </footer>
 
